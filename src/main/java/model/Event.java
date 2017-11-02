@@ -6,25 +6,27 @@ import java.util.Date;
  * Created by Maksim on 10/31/2017.
  */
 public class Event {
-     private int id;
-     private double sum;
-     private Date date;
-     private Shop shop;
 
+    private double sum;
+    private Date date;
+    private Shop shop;
+    private String paymentCategory;
+    private long id;
     public Event() {
     }
 
-    public Event(double sum, Date date, Shop shop) {
+    public Event(double sum, Date date, Shop shop, String paymentCategory) {
         this.sum = sum;
         this.date = date;
         this.shop = shop;
+        this.paymentCategory = paymentCategory;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,5 +52,13 @@ public class Event {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public String getPaymentCategory() {
+        return paymentCategory;
+    }
+
+    public void setPaymentCategory(String paymentCategory) {
+        this.paymentCategory = paymentCategory;
     }
 }

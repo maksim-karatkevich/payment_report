@@ -7,25 +7,27 @@ import java.util.List;
  */
 public class Shop {
 
-    private int id;
     private String name;
-    private String paymentCategory;
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Shop() {
     }
 
-    public Shop(int id, String name, String paymentCategory) {
-        this.id = id;
+    public Shop(String name, long id) {
         this.name = name;
-        this.paymentCategory = paymentCategory;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
         this.id = id;
+    }
+
+    public Shop(String name) {
+        this.name = name;
     }
 
     public String getName() {
@@ -34,13 +36,5 @@ public class Shop {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPaymentCategory() {
-        return paymentCategory;
-    }
-
-    public void setPaymentCategory(String paymentCategory) {
-        this.paymentCategory = paymentCategory;
     }
 }

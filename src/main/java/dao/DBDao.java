@@ -10,4 +10,5 @@ public interface DBDao<O> {
     void create(O o);
     void update(O o);
     void remove(O o);
+    O get(O o);
 }
