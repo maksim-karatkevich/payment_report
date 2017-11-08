@@ -2,11 +2,13 @@ package dao;
 
 import model.Event;
 import model.Shop;
+import sun.swing.BakedArrayList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.WeakHashMap;
 
 /**
@@ -17,12 +19,14 @@ public class ShopDaoImpl extends AbstractDAO implements DBDao {
     public void create(Object o) {
         Shop shop = (Shop) o;
         String name = shop.getName();
+        List<Object> parameters = new BakedArrayList()
         try {
-            PreparedStatement preparedStatement = getConnection()
-                    .prepareStatement("INSERT INTO shop (name) SELECT ? WHERE NOT EXISTS (SELECT * FROM shop WHERE name = ?)");
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, name);
-            preparedStatement.execute();
+            execute("INSERT INTO shop (name) SELECT ? WHERE NOT EXISTS (SELECT * FROM shop WHERE name = ?))");
+//            PreparedStatement preparedStatement = getConnection()
+//                    .prepareStatement("INSERT INTO shop (name) SELECT ? WHERE NOT EXISTS (SELECT * FROM shop WHERE name = ?)");
+//            preparedStatement.setString(1, name);
+//            preparedStatement.setString(2, name);
+//            preparedStatement.execute();
             System.out.println();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -53,7 +57,6 @@ public class ShopDaoImpl extends AbstractDAO implements DBDao {
     public void remove(Object o) {
 //        todo: not needed yet
     }
-
 
 
 }

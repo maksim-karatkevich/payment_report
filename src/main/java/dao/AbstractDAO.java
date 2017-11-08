@@ -1,32 +1,53 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
 
 /**
  * Created by Maksim on 10/31/2017.
  */
 public class AbstractDAO {
 
-    private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/payment_report";
-    private static final String ID = "root";
-    private static final String PASS = "root";
+    private DBConnector connector = new DBConnector();
+    private Connection connection;
+    private PreparedStatement prepStmt = null;
 
-
-    protected Connection getConnection() {
+    private ResultSet executeQuery(String query, List<Object> parameters)  {
+        ResultSet resultSet = null;
         try {
-            Class.forName(DRIVER_NAME);
-            return DriverManager.getConnection(DB_URL, ID, PASS);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            prepStmt = connector.getConnection().prepareStatement(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        if (prepStmt != null) {
+            setQueryParameters(prepStmt, parameters);
+            try {
+                resultSet = prepStmt.executeQuery();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultSet;
+//        return getPrepareStatement().executeQuery();
     }
 
-    protected PreparedStatement getPrepareStatement(String query) throws SQLException {
-        return getConnection().prepareStatement(query);
+    protected boolean execute(String query) throws SQLException {
+        return getPrepareStatement().execute(query);
+    }
+
+    protected int executeUpdate(String query) throws SQLException {
+        return getPrepareStatement().executeUpdate();
+    }
+
+    private void setQueryParameters(PreparedStatement prepStmt, List<Object> parameters) {
+            for (int i = 0; i < parameters.size(); i++) {
+                try {
+                    Object param = parameters.get(i);
+                    prepStmt.setObject(i + 1, param);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
     }
 }
 
