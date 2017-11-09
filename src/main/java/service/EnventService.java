@@ -11,7 +11,7 @@ public class EnventService {
 
 
     public void saveEvent(Event event) {
-        shopDao.create(event.getShop());
+        shopDao.persist(event.getShop());
     }
 
     public Event getEvent(int id) {

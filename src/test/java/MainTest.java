@@ -1,10 +1,8 @@
-import dao.EventDaoImpl;
-import dao.ShopDaoImpl;
-import model.Event;
-import model.Shop;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Date;
+import dao.ShopDaoImpl;
+import model.Shop;
 
 /**
  * Created by Maksim on 10/31/2017.
@@ -12,11 +10,28 @@ import java.util.Date;
 public class MainTest {
 
     @Test
-    public void testSomeStaff() {
-        EventDaoImpl eventDao = new EventDaoImpl();
-        Shop shop = new Shop("Aliexpress", 11);
-        Event event = new Event(1.1, new Date(), shop, "payment");
-        eventDao.create(event);
+    public void getEntityByNameTest() {
+        ShopDaoImpl shopDao = new ShopDaoImpl();
+        String name = "Aliexpress";
+        Shop shop = shopDao.findByName(name);
+        Assert.assertNotNull(shop);
+    }
 
+    @Test
+    public void getEntityByIdTest() {
+        ShopDaoImpl shopDao = new ShopDaoImpl();
+        long id = 1;
+        Shop shop = shopDao.findById(id);
+        Assert.assertNotNull(shop);
+    }
+
+    @Test
+    public void persistShopTest() {
+        ShopDaoImpl shopDao = new ShopDaoImpl();
+        int min = Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
+        Shop shop = new Shop("Aliexpress", min + (int)(Math.random() * ((max - min) + 1)));
+        int res = shopDao.persist(shop);
+        Assert.assertEquals(1, res);
     }
 }
