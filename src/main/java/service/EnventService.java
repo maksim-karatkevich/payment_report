@@ -1,13 +1,13 @@
 package service;
 
-import dao.ShopDaoImpl;
+import dao.ShopDAOImpl;
 import model.Event;
 
 /**
  * Created by Maksim on 11/1/2017.
  */
 public class EnventService {
-    ShopDaoImpl shopDao = new ShopDaoImpl();
+    ShopDAOImpl shopDao = new ShopDAOImpl();
 
 
     public void saveEvent(Event event) {

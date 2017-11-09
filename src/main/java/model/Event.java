@@ -10,16 +10,16 @@ public class Event {
     private double sum;
     private Date date;
     private Shop shop;
-    private String paymentCategory;
+    private Category category;
+
     private long id;
     public Event() {
     }
-
-    public Event(double sum, Date date, Shop shop, String paymentCategory) {
+    public Event(Shop shop, Category category, double sum, Date date) {
         this.sum = sum;
         this.date = date;
         this.shop = shop;
-        this.paymentCategory = paymentCategory;
+        this.category = category;
     }
 
     public long getId() {
@@ -54,11 +54,11 @@ public class Event {
         this.shop = shop;
     }
 
-    public String getPaymentCategory() {
-        return paymentCategory;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setPaymentCategory(String paymentCategory) {
-        this.paymentCategory = paymentCategory;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
