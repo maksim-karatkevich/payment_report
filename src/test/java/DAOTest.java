@@ -16,7 +16,7 @@ import model.Shop;
 /**
  * Created by Maksim on 10/31/2017.
  */
-public class MainTest {
+public class DAOTest {
 
 	@Test
 	public void getEntityByNameTest() {
