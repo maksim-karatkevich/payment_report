@@ -1,13 +1,10 @@
 package dao;
 
-import dao.handler.EventResultHandlerImpl;
-import model.Category;
-import model.Event;
-
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import dao.handler.EventResultHandlerImpl;
+import model.Event;
 
 /**
  * Created by Maksim on 10/31/2017.
@@ -24,12 +21,31 @@ public class EventDAOImpl extends AbstractDAO {
         String query = "INSERT INTO event(date,sum,category_id,shop_id) VALUES (?,?,(SELECT id FROM category WHERE id = ?),(SELECT id FROM shop WHERE id = ?))";
         return insertEntity(query, parameters);
     }
-//    select event.id, event.date, event.sum, event.shop_id, shop.name, event.category_id, category.name from event join category on event.category_id=category.id inner join shop on event.shop_id=shop.id
     public Event findById(long id) {
-        String query = "SELECT event.id, event.date, event.sum, event.shop_id, shop.name, event.category_id, category.name FROM event inner join category on event.category_id=category.id inner join shop on event.shop_id=shop.id";
-//        String query = "SELECT * FROM Category WHERE id = ?";
+        String query = "SELECT event.id, event.date, event.sum, event.shop_id, shop.name, event.category_id, category.name FROM event inner join category on event.category_id=category.id inner join shop on event.shop_id=shop.id WHERE event.id = ?";
         return find(id, query);
     }
+
+    public Event findByDate(String date) {
+        String query = "SELECT event.id, event.date, event.sum, event.shop_id, shop.name, event.category_id, category.name FROM event inner join category on event.category_id=category.id inner join shop on event.shop_id=shop.id WHERE event.date = ?";
+        return find(date, query);
+    }
+
+    public List<Event> findByPeriod(String start, String end) {
+        List<Object> parameters = new ArrayList<Object>();
+        parameters.add(start);
+        parameters.add(end);
+        String query = "SELECT event.id, event.date, event.sum, event.shop_id, shop.name, event.category_id, category.name FROM event inner join category on event.category_id=category.id inner join shop on event.shop_id=shop.id WHERE date between ? AND ?";
+        return getEntityList(query, parameters, eventResultHandler);
+    }
+
+    public int setComment(String comment, long id) {
+		List<Object> parameters = new ArrayList<Object>();
+		parameters.add(comment);
+		parameters.add(id);
+		String query = "UPDATE event SET comments=? WHERE id=?";
+		return insertEntity(query, parameters);
+	}
 
     private Event find(Object parameter, String query) {
         List<Object> parameters = new ArrayList<Object>();

@@ -7,58 +7,74 @@ import java.util.Date;
  */
 public class Event {
 
-    private double sum;
-    private Date date;
-    private Shop shop;
-    private Category category;
+	private long id;
+	private double sum;
+	private Date date;
+	private Shop shop;
+	private Category category;
 
-    private long id;
-    public Event() {
-    }
-    public Event(Shop shop, Category category, double sum, Date date) {
-        this.sum = sum;
-        this.date = date;
-        this.shop = shop;
-        this.category = category;
-    }
+	private String comment;
 
-    public long getId() {
-        return id;
-    }
+	public Event() {
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public Event(Shop shop, Category category, double sum, Date date) {
+		this.sum = sum;
+		this.date = date;
+		this.shop = shop;
+		this.category = category;
+	}
 
-    public double getSum() {
-        return sum;
-    }
+	public Event(Shop shop, Category category, double sum, Date date, String comment) {
+		this(shop, category, sum, date);
+		this.comment = comment;
+	}
 
-    public void setSum(double sum) {
-        this.sum = sum;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public double getSum() {
+		return sum;
+	}
 
-    public Shop getShop() {
-        return shop;
-    }
+	public void setSum(double sum) {
+		this.sum = sum;
+	}
 
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public Category getCategory() {
-        return category;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }

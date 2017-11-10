@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Created by Maksim on 10/31/2017.
  */
@@ -21,7 +19,7 @@ public class Shop {
     public Shop() {
     }
 
-    public Shop(String name, long id) {
+    public Shop(long id, String name) {
         this.name = name;
         this.id = id;
     }
